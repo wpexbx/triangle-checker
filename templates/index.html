@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Verificador de Triângulos</h1>
+
+    <form method="POST" action="/">
+        {{ csrf_token }}
+        <label>
+            <input type="radio" name="tipo" value="lado" required checked>
+            Lados
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="angulo" required>
+            Ângulos
+        </label>
+        <br /><br />
+        <label>Valor 1:</label>
+        <input type="number" id="valor1" name="valor1" required>
+        <br />
+        <label>Valor 2:</label>
+        <input type="number" id="valor2" name="valor2" required>
+        <br />
+        <label>Valor 3:</label>
+        <input type="number" id="valor3" name="valor3" required>
+        <br /><br />
+        <input type="submit" value="Verificar">
+    </form>
+
+    {% if classification %}
+        <h2>Classificação do triângulo: {{ classification }}</h2>
+        <img src="{{ url_for('static', filename=image)}}" alt="Triângulo Gerado">
+    {% endif %}
+
+    {% if error %}
+        <h2>{{ error }}</h2>
+    {% endif %}
+
+{% endblock %}
